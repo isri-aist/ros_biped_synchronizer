@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node pkg="ros_biped_synchronizer" exec="ros_biped_synchronizer" name="ros_biped_synchronizer_node">
+
+        <!-- Node parameters -->
+        <!-- Quality of Service setting, try to be consistent with the same number in the whole system -->
+        <param name="qos" type="int" value="10"/> 
+
+        <!-- Force threshold for synchronization, adjust as needed.--> 
+        <!--270 works well for the Baseline Walking Controller in simulation with HRP5P. -->
+        <param name="force_threshold" type="float" value="270.0"/> 
+
+        <!-- Age penalty for synchronizer, adjust as needed. -->
+        <!-- 0.01 seconds is a good value for the HRP5P robot, as it outputs at 200Hz. -->
+        <param name="age_penalty" type="float" value="0.01"/>
+
+        <!-- Maximum FPS for the synchronizer, adjust as needed. -->
+        <param name="max_fps" type="float" value="10.0"/>
+
+
+        <!-- Node topics -->
+        <!-- Subscribe to the left and right foot force sensors -->
+        <remap from="/LeftFootForceSensor" to="/real/hrp5_p/force/LeftFootForceSensor"/>
+        <remap from="/RightFootForceSensor" to="/real/hrp5_p/force/RightFootForceSensor"/>
+        <remap from="/camera/image_raw" to="/ros2_engine3d/camera/image"/>
+        <!-- <remap from="/synchronizer/image" to="/ros2_engine3d/camera/synchronizer_image"/> -->
+
+        <!-- Publish the trigger topic -->
+        <remap from="/trigger" to="/synchronizer/trigger"/>
+    </node>
+</launch>
