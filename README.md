@@ -8,9 +8,9 @@ The goal of this node is to synchronize the image capture on a biped robot for v
 
 ```
                                 +-------------------------------------------+
-                +- leftFoot  -->|--->+------------+                         |
+                +- RightFoot -->|--->+------------+                         |
   wrenchStamped |               |    | sync 0.01s | $|A-B|<270$?            |
-                +- rightFoot -->|-+->+------------+     yes                 |
+                +- LeftFoot  -->|-+->+------------+     yes                 |
                                 | |                      |                  |
                                 | +-----------------+    +------------------|--> Trigger
                                 |                   |    |                  |
